@@ -18,7 +18,7 @@ df <- read_csv("data/fb-congress-data.csv")
 head(df)
 ```
 
-## Data Transformation 
+## Data transformation 
 
 These functions are useful for analyzing how funny users found posts in the data sample 
 
@@ -34,6 +34,18 @@ funny_party <- function(data) {
 }
 
 funny_party(df)
+
+# Function 2 - returns the message and haha_count for the funniest post made by a congressman and a congresswoman
+
+funny_congresspeople <- function(data) {
+  funny_group <- data %>%
+    group_by(gender) %>%
+    filter(haha_count == max(haha_count, na.rm = TRUE)) %>%
+    select(gender, message, haha_count)
+  return(funny_group)
+}
+
+funny_congresspeople(df)
 
 ```
 

@@ -397,7 +397,7 @@ U.S. Congress</p>
 ## #   type &lt;chr&gt;, party &lt;chr&gt;</code></pre>
 </div>
 <div id="data-transformation" class="section level2">
-<h2>Data Transformation</h2>
+<h2>Data transformation</h2>
 <p>These functions are useful for analyzing how funny users found posts
 in the data sample</p>
 <pre class="r"><code># Function 1 - returns a summary of the number of posts which received a laugh reaction, by party
@@ -417,6 +417,23 @@ funny_party(df)</code></pre>
 ## 1 Democrat           1671
 ## 2 Independent          40
 ## 3 Republican         1744</code></pre>
+<pre class="r"><code># Function 2 - returns the message and haha_count for the funniest post made by a congressman and a congresswoman
+
+funny_congresspeople &lt;- function(data) {
+  funny_group &lt;- data %&gt;%
+    group_by(gender) %&gt;%
+    filter(haha_count == max(haha_count, na.rm = TRUE)) %&gt;%
+    select(gender, message, haha_count)
+  return(funny_group)
+}
+
+funny_congresspeople(df)</code></pre>
+<pre><code>## # A tibble: 2 × 3
+## # Groups:   gender [2]
+##   gender message                                                      haha_count
+##   &lt;chr&gt;  &lt;chr&gt;                                                             &lt;dbl&gt;
+## 1 F      &quot;A Republican colleague let me see his Trump hat. I checked…        473
+## 2 M      &quot;Honestly, it is a little embarrassing to tell Canadians wh…       6687</code></pre>
 </div>
 
 
