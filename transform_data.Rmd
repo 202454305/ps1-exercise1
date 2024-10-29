@@ -1,0 +1,39 @@
+---
+title: "Data Transformation - US Congress Facebook Posts"
+---
+
+## Load tidyverse
+
+```{r}
+library(tidyverse)
+```
+
+## Read in data and create dataframe
+
+The following data is a sample of 10,000 Facebook posts by members of U.S. Congress
+
+```{r}
+df <- read_csv("data/fb-congress-data.csv")
+
+head(df)
+```
+
+## Data Transformation 
+
+These functions are useful for analyzing how funny users found posts in the data sample 
+
+```{r}
+# Function 1 - returns a summary of the number of posts which received a laugh reaction, by party
+
+funny_party <- function(data) {
+  funny_summary <- data %>%
+    filter(haha_count > 0) %>%  # drop posts which aren't funny
+    group_by(party) %>%
+    summarise(funny_posts = n())  # count the number of funny posts for each party
+  return(funny_summary)
+}
+
+funny_party(df)
+
+```
+
