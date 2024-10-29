@@ -37,7 +37,7 @@ funny_party(df)
 
 # Function 2 - returns the message and haha_count for the funniest post made by a congressman and a congresswoman
 
-funny_congresspeople <- function(data) {
+funny_congresspeople <- function(data_new) {
   funny_group <- data %>%
     group_by(gender) %>%
     filter(haha_count == max(haha_count, na.rm = TRUE)) %>%
