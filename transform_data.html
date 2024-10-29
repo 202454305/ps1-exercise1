@@ -419,8 +419,8 @@ funny_party(df)</code></pre>
 ## 3 Republican         1744</code></pre>
 <pre class="r"><code># Function 2 - returns the message and haha_count for the funniest post made by a congressman and a congresswoman
 
-funny_congresspeople &lt;- function(data) {
-  funny_group &lt;- data %&gt;%
+funny_congresspeople &lt;- function(data_new) {
+  funny_group &lt;- data_new %&gt;%
     group_by(gender) %&gt;%
     filter(haha_count == max(haha_count, na.rm = TRUE)) %&gt;%
     select(gender, message, haha_count)
